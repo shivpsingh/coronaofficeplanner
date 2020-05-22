@@ -88,8 +88,29 @@ hr {
     color: gray;
 }
 
+.padding-0 {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.search-icon {
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+    margin-right: 10px;
+    color: #787885;
+}
+
+.search-bg {
+    background-color: #f0f0f1;
+}
+
+.search-bg:focus {
+    background-color: #f0f0f1;
+}
+
 .panel-primary {
-    border-color: #2979ff;
+    border-color: #b4b4bb;
 }
 
 .panel-secondry {
