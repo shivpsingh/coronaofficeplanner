@@ -6,11 +6,13 @@ $(document).ready(function() {
         
         if(!dataObj.reserved) {
 
-            if(!dataObj.slotsAvailable) {
-                dataObj.activeInActivePanelClass = `panel-primary-inactive`
+            if(dataObj.available_slots == 0) {
+                dataObj.activeInActivePanelClass = `panel panel-secondary`
                 dataObj.slotsAvailable = `Fully Reserved`
+                dataObj.disabled = "disabled"
             } else {
-                dataObj.activeInActivePanelClass = `panel-primary`
+                dataObj.disabled = ""
+                dataObj.activeInActivePanelClass = `panel panel-primary`
                 dataObj.slotsAvailable = dataObj.available_slots + ` Spot Available`
             }
 
@@ -18,18 +20,21 @@ $(document).ready(function() {
             dataObj.dateLabel = dataObj.date
             dataObj.reservedLabel = `Reserve`
             dataObj.reservedLabelClass = `btn btn2`
+            dataObj.panelClass = `calender-panel-container-removable`
         } else {
-            dataObj.activeInActivePanelClass = `panel-secondary`
+            dataObj.activeInActivePanelClass = `panel panel-reserved`
             dataObj.reservedSlots = ''
             dataObj.slotsAvailable = ''
             dataObj.dateLabel = dataObj.date
             dataObj.reservedLabel = `Reserved`
             dataObj.reservedLabelClass = `btn btn3`
+            dataObj.panelClass = `schedule-panel-container-removable`
+            dataObj.disabled = "disabled"
         }
 
         const PANELDATA = `
         <div class="panel-group">
-            <div class="panel ${dataObj.activeInActivePanelClass}">
+            <div class="${dataObj.activeInActivePanelClass}">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-2"><b>${dataObj.dateLabel}</b>
@@ -40,7 +45,7 @@ $(document).ready(function() {
                         </div>
                         <div class="col-md-2">${dataObj.reservedSlots}
                         </div>
-                        <div class="col-md-2"><button class="${dataObj.reservedLabelClass}"> ${dataObj.reservedLabel} </button>
+                        <div class="col-md-2"><button class="${dataObj.reservedLabelClass}" ${dataObj.disabled}> ${dataObj.reservedLabel} </button>
                         </div>
                     </div>
                 </div>
@@ -51,26 +56,16 @@ $(document).ready(function() {
     }
 
     function fillLocationLabel(locationObj) {
-        const LOCATIONLABEL = `<div class="btn location-label">${locationObj.locationLabel}</div><br><br>`
+        const LOCATIONLABEL = `
+        <div class="btn location-label">${locationObj.locationLabel}</div><br><br>`
         return LOCATIONLABEL
     }
 
-    console.log(
-        fillPanelData({
-            'total_slots': 25,
-            'available_slots': 75,
-            'date': 'Monday, May 18',
-            'reserved': false
-        })
-    )
-
-    console.log(
-        fillLocationLabel({
-            'locationLabel': 'First Floor'
-        })
-    )
-
     function callApiUrl(start, end, label) {
+
+        $('.schedule-panel-container-removable').remove();
+        $('.calender-panel-container-removable').remove();
+
         api_url = API_URL
 
         if(start) {
@@ -88,15 +83,28 @@ $(document).ready(function() {
             async: true,
             success: function(result) {
 
+                function setDivElem(data, reserved) {
+                    if (reserved) {
+                        document.getElementById("schedule-panel-container").innerHTML += data;
+                    } else {
+                        document.getElementById("calender-panel-container").innerHTML += data;
+                    }
+                }
+
                 function print_val(item) {
-                    console.log(fillPanelData(item))
-                    // $(dom_elem).appendTo("body");
+                    let data = fillPanelData(item);
+                    setDivElem(data, item['reserved']);
                 }
 
                 for (const [key, value] of Object.entries(result)) {
-                    console.log(fillLocationLabel({
+                    let key_val = fillLocationLabel({
                         'locationLabel': key
-                    }))
+                    })
+                    
+                    // document.getElementsByClassName("calender-panel-container-removable").innerHTML += key_val;
+                    // document.getElementsByClassName("schedule-panel-container-removable").innerHTML += key_val;
+                    document.getElementById("calender-panel-container").innerHTML += key_val;
+                    document.getElementById("schedule-panel-container").innerHTML += key_val;
                     value.forEach(print_val);
                 }
             }

@@ -11,6 +11,7 @@ body {
     font-family: Inter;
     font-style: normal;
     line-height: 36px;
+    background-color: #f0f0f1;
 }
 
 .nav-options {
@@ -106,4 +107,48 @@ hr {
 
 .location-label {
     color: white;background-color: #989898;
+}
+
+.btn2 {
+    color: white;
+    border-radius: 50px;
+    padding: 10px 29px;
+    margin-top: -5px;
+    background-color: #2979ff;
+}
+
+.panel-group .panel {
+    margin-bottom: 6px;
+    border-left-width: 9px;
+    border-radius: 9px;
+}
+
+.panel-primary {
+    /* border-color: #2979ff; */
+    border-color: gray;
+}
+
+.panel-secondary {
+    /* border-color: #94bbff; */
+    border-color: #2979ff;
+}
+
+.btn3 {
+    color: white;
+    border-radius: 50px;
+    padding: 10px 29px;
+    margin-top: -5px;
+    background-color: #65b168;
+}
+
+.panel-reserved {
+    border-color: #65b168;
+}
+
+.daterange-width {
+    width: 10%;
+}
+
+.gray {
+    color: gray;
 }
