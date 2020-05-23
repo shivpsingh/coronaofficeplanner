@@ -2,272 +2,146 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Corona Office Planner</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="dist/daterangepicker.js"></script>
-    <link rel="stylesheet" type="text/css" href="dist/daterangepicker.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+
+    <!-- Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
     <link rel="manifest" href="icon/site.webmanifest">
 
+    <!-- DatePicker -->
+    <link rel="stylesheet" type="text/css" href="dist/daterangepicker.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <!-- Responsice CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style.mob.css">
+
 </head>
 
-<body style="background-color: #f0f0f1;">
+<body>
 
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav navbar-right">
-                <li><button class="btn btn1"><a href="#" style="color: gray"><span></span> Home</a></button></li>
-                <li><a href="#"><span style="color: white"></span>Help</a></li>
-                <li><a href="#"><span style="color: white"></span><img src="images/avatar.jpg" style="height: 27px;width: 26px; border-radius: 50%;"> Account</a></li>
+    <section id="navigation-bar">
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <div class="nav-elem-border">
+                            <a href="#home">Home</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#help">Help</a>
+                    </li>
+                    <li>
+                        <img class="account-img" src="images/avatar.jpg ">
+                    </li>
+                    <li>
+                        <a href="#account">Account</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+
+    <section id="options-tab">
+        <div>
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#schedule">MY SCHEDULE</a>
+                </li>
+                <li>
+                    <a href="#calender"> CALENDAR</a>
+                </li>
             </ul>
         </div>
-    </nav>
+        <hr>
+    </section>
 
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="#home">MY SCHEDULE</a></li>
-        <li><a href="#menu1"> CALENDAR</a></li>
-    </ul>
-    <hr>
-    <div class="tab-content">
-        <div id="home" class="tab-pane fade in active">
-            <div class="container-fluid">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <button class="date-picker-style" name="daterange"><b class="gray">May 18 - May 28 </b><i class="caret gray"></i></button>
-                            </div>
-                            <div class="col-md-2 padding-0"><b class="gray">All Locations </b><i class="caret gray"></i>
-                            </div>
-                            <div class="col-md-6"></div>
-                            <div class="col-md-2">
+
+    <section id="panel-section">
+        <div class="tab-content">
+            <!-- Schedule Part -->
+            <div id="schedule" class="tab-pane fade in active">
+                <div class="container-fluid">
+                    <!-- Schedule Panel Upper Options -->
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2 daterange-width">
+                                    <button class="date-picker-style" name="daterange"><b class="gray">May 18 - May 28 </b><i class="caret gray"></i></button>
+                                </div>
+                                <div class="col-md-2 padding-0"><b class="gray">All Locations </b><i class="caret gray"></i>
+                                </div>
+                                <div class="col-md-6"></div>
+                                <div class="col-md-2">
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Single Panel - Reserved -->
+                    <div id="schedule-panel-container">
+                        <!--  -->
+                    </div>
+                    <!-- Single Panel End -->
                 </div>
-                <div>
-                    <button class="btn" style="color: white;background-color: #989898;"> First Floor </button><br><br>
-                    <div class="panel-group">
-                        <div class="panel panel-reserved">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-2"><b>Monday, May 18</b>
-                                    </div>
-                                    <div class="col-md-4">
-                                    </div>
-                                    <div class="col-md-2">
-                                    </div>
-                                    <div class="col-md-2">
-                                    </div>
-                                    <div class="col-md-2"><button class="btn btn3"> Reserved </button>
-                                    </div>
+            </div>
+            <!-- Calender Part -->
+            <div id="calender" class="tab-pane fade">
+                <div class="container-fluid">
+                    <!-- Calender Panel Upper Options -->
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2 daterange-width">
+                                    <button class="date-picker-style" name="daterange"><b class="gray">May 18 - May 28 </b><i class="caret gray"></i></button>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-reserved">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-2"><b>Wednesday, May 20</b>
-                                    </div>
-                                    <div class="col-md-4">
-                                    </div>
-                                    <div class="col-md-2">
-                                    </div>
-                                    <div class="col-md-2">
-                                    </div>
-                                    <div class="col-md-2"><button class="btn btn3"> Reserved </button>
-                                    </div>
+                                <div class="col-md-2 padding-0"><b class="gray">All Locations </b><i class="caret gray"></i>
                                 </div>
+                                <div class="col-md-6"></div>
+                                <div class="col-md-2 padding-0 pull-right">
+                                    <div class="input-group">
+                                        <input class="form-control search-bg" placeholder="Search by name" name="srch-term" id="ed-srch-term" type="text" style="border-radius: 99px">
+                                        <i class="fa fa-search pull-right search-icon" aria-hidden="true"></i>
+                                    </div>
                             </div>
                         </div>
                     </div>
+                    </div>
+                    <!-- Single Panel To be Reserved -->
+                    <div id="calender-panel-container">
+                        <!--  -->
+                    </div>
+                    <!-- Single Panel End -->
                 </div>
             </div>
         </div>
-        <div id="menu1" class="tab-pane fade">
-            <div class="container-fluid">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <button class="date-picker-style" name="daterange"><b class="gray">May 18 - May 28 </b><i class="caret gray"></i></button>
-                            </div>
-                            <div class="col-md-2 padding-0"><b class="gray">All Locations </b><i class="caret gray"></i>
-                            </div>
-                            <div class="col-md-6"></div>
-                            <div class="col-md-2">
-                                <div class="input-group">
-                                    <input class="form-control search-bg" placeholder="Search by name" name="srch-term" id="ed-srch-term" type="text" style="border-radius: 99px"><i class="fa fa-search pull-right search-icon" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <button class="btn" style="color: white;background-color: #989898;"> First Floor </button><br><br>
-                    <div class="panel-group">
-                        <div class="panel panel-primary">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-2"><b>Monday, May 18</b>
-                                    </div>
-                                    <div class="col-md-4">
-                                    </div>
-                                    <div class="col-md-2">75 Spot Available
-                                    </div>
-                                    <div class="col-md-2">&nbsp;25 People Reserved <i class="caret"></i>
-                                    </div>
-                                    <div class="col-md-2"><button class="btn btn2"> Reserve </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-secondry">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-2"><b>Wednesday, May 20</b>
-                                    </div>
-                                    <div class="col-md-4">
-                                    </div>
-                                    <div class="col-md-2">Fully Booked
-                                    </div>
-                                    <div class="col-md-2">100 People Reserved <i class="caret"></i>
-                                    </div>
-                                    <div class="col-md-2"><button class="btn btn2" disabled=""> Reserve </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-primary">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-2"><b>Tuesday, May 20</b>
-                                    </div>
-                                    <div class="col-md-4">
-                                    </div>
-                                    <div class="col-md-2">75 Spot Available
-                                    </div>
-                                    <div class="col-md-2">&nbsp;25 People Reserved <i class="caret"></i>
-                                    </div>
-                                    <div class="col-md-2"><button class="btn btn2"> Reserve </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-primary">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-2"><b>Friday, May 22</b>
-                                    </div>
-                                    <div class="col-md-4">
-                                    </div>
-                                    <div class="col-md-2">75 Spot Available
-                                    </div>
-                                    <div class="col-md-2">&nbsp;25 People Reserved <i class="caret"></i>
-                                    </div>
-                                    <div class="col-md-2"><button class="btn btn2"> Reserve </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-primary">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-2"><b>Monday, May 25</b>
-                                    </div>
-                                    <div class="col-md-4">
-                                    </div>
-                                    <div class="col-md-2">75 Spot Available
-                                    </div>
-                                    <div class="col-md-2">&nbsp;25 People Reserved <i class="caret"></i>
-                                    </div>
-                                    <div class="col-md-2"><button class="btn btn2"> Reserve </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-primary">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-2"><b>Monday, May 18</b>
-                                    </div>
-                                    <div class="col-md-4">
-                                    </div>
-                                    <div class="col-md-2">75 Spot Available
-                                    </div>
-                                    <div class="col-md-2">&nbsp;25 People Reserved <i class="caret"></i>
-                                    </div>
-                                    <div class="col-md-2"><button class="btn btn2"> Reserve </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-primary">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-2"><b>Monday, Mat 26</b>
-                                    </div>
-                                    <div class="col-md-4">
-                                    </div>
-                                    <div class="col-md-2">75 Spot Available
-                                    </div>
-                                    <div class="col-md-2">&nbsp;25 People Reserved <i class="caret"></i>
-                                    </div>
-                                    <div class="col-md-2"><button class="btn btn-primary btn2"> Reserve </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-primary">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-2"><b>Monday, May 28</b>
-                                    </div>
-                                    <div class="col-md-4">
-                                    </div>
-                                    <div class="col-md-2">75 Spot Available
-                                    </div>
-                                    <div class="col-md-2">&nbsp;25 People Reserved <i class="caret"></i>
-                                    </div>
-                                    <div class="col-md-2"><button class="btn btn-primary btn2"> Reserve </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </section>
 
 
-        <script>
-            $(document).ready(function() {
-                $(".nav-tabs a").click(function() {
-                    $(this).tab('show');
-                });
-                $('.nav-tabs a').on('shown.bs.tab', function(event) {
-                    var x = $(event.target).text(); // active tab
-                    var y = $(event.relatedTarget).text(); // previous tab
-                    $(".act span").text(x);
-                    $(".prev span").text(y);
-                });
-                $(function() {
-                    $('button[name="daterange"]').daterangepicker({
-                        opens: 'left'
-                    }, function(start, end, label) {});
-                });
-            });
-        </script>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js "></script>
+    <script type="text/javascript " src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js "></script>
+
+    <!-- DateRangePicker -->
+    <script type="text/javascript " src="dist/daterangepicker.js "></script>
+
+    <!-- Custom Script -->
+    <script type="text/javascript " src="js/script.js "></script>
+
 
 </body>
 
