@@ -1,0 +1,1 @@
+api_url = "https://6mvabh1u9g.execute-api.us-west-2.amazonaws.com/dev/slots";
