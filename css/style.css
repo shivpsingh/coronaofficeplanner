@@ -118,10 +118,9 @@ hr {
 }
 
 .panel-group .panel:hover {
-    margin-bottom: 9px;
-    border-left-width: 9px;
+    margin-bottom: 5px;
     border-radius: 9px;
-    border: 1px solid #2979ff;
+    border: 1px 1px 1px 9px;
 }
 
 .panel-primary {
