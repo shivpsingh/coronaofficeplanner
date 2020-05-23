@@ -72,12 +72,6 @@ hr {
     border-top: 1px solid #9e9898;
 }
 
-.panel-group .panel {
-    margin-bottom: 6px;
-    border-left-width: 9px;
-    border-radius: 9px;
-}
-
 .padding-0 {
     padding-right: 0;
     padding-left: 0;
@@ -118,19 +112,31 @@ hr {
 }
 
 .panel-group .panel {
-    margin-bottom: 6px;
+    margin-bottom: 9px;
     border-left-width: 9px;
     border-radius: 9px;
 }
 
+.panel-group .panel:hover {
+    margin-bottom: 9px;
+    border-left-width: 9px;
+    border-radius: 9px;
+    border: 1px solid #2979ff;
+}
+
 .panel-primary {
-    /* border-color: #2979ff; */
-    border-color: gray;
+    border-style: solid;
+    border-color: gray gray gray #2979ff;
 }
 
 .panel-secondary {
-    /* border-color: #94bbff; */
-    border-color: #2979ff;
+    border-style: solid;
+    border-color: gray gray gray #94bbff;
+}
+
+.panel-reserved {
+    border-style: solid;
+    border-color: gray gray gray #65b168;
 }
 
 .btn3 {
@@ -139,10 +145,6 @@ hr {
     padding: 10px 29px;
     margin-top: -5px;
     background-color: #65b168;
-}
-
-.panel-reserved {
-    border-color: #65b168;
 }
 
 .daterange-width {
