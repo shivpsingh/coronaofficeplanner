@@ -178,3 +178,8 @@ hr {
 .gray {
     color: gray;
 }
+
+.dropdown-toggle:focus,
+.dropdown-toggle:hover {
+    color: gray;
+}
