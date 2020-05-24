@@ -1,0 +1,115 @@
+{
+    "First Floor": [{
+            "date": "23/05/2020",
+            "available_slots": 75,
+            "total_slots": 25,
+            "reserved": true,
+            "person_details": [{
+                "image": "images/jack.jpg",
+                "name": "Jack"
+            }]
+        },
+        {
+            "date": "24/05/2020",
+            "available_slots": 0,
+            "total_slots": 100,
+            "reserved": false,
+            "person_details": [{
+                "image": "images/jack.jpg",
+                "name": "Jack"
+            },
+            {
+                "image": "images/jack.jpg",
+                "name": "ABC"
+            },
+            {
+                "image": "images/jack.jpg",
+                "name": "Jack"
+            },
+            {
+                "image": "images/jack.jpg",
+                "name": "ABC"
+            },
+            {
+                "image": "images/jack.jpg",
+                "name": "Jack"
+            },
+            {
+                "image": "images/jack.jpg",
+                "name": "ABC"
+            }
+        ]
+        },
+        {
+            "date": "25/05/2020",
+            "available_slots": 75,
+            "total_slots": 25,
+            "reserved": true,
+            "person_details": [{
+                "image": "images/jack.jpg",
+                "name": "Jack"
+            }]
+        },
+        {
+            "date": "26/05/2020",
+            "available_slots": 75,
+            "total_slots": 25,
+            "reserved": false,
+            "person_details": [{
+                "image": "images/jack.jpg",
+                "name": "Jack"
+            }]
+        },
+        {
+            "date": "27/05/2020",
+            "available_slots": 75,
+            "total_slots": 25,
+            "reserved": false,
+            "person_details": [{
+                "image": "images/jack.jpg",
+                "name": "Jack"
+            }]
+        }
+    ],
+    "Second Floor": [{
+            "date": "28/05/2020",
+            "available_slots": 75,
+            "total_slots": 25,
+            "reserved": false,
+            "person_details": [{
+                "image": "images/jack.jpg",
+                "name": "Jack"
+            }]
+        },
+        {
+            "date": "29/05/2020",
+            "available_slots": 75,
+            "total_slots": 25,
+            "reserved": true,
+            "person_details": [{
+                "image": "images/jack.jpg",
+                "name": "Jack"
+            }]
+        },
+        {
+            "date": "30/05/2020",
+            "available_slots": 0,
+            "total_slots": 100,
+            "reserved": false,
+            "person_details": [{
+                "image": "images/jack.jpg",
+                "name": "Jack"
+            }]
+        },
+        {
+            "date": "21/06/2020",
+            "available_slots": 75,
+            "total_slots": 25,
+            "reserved": false,
+            "person_details": [{
+                "image": "images/jack.jpg",
+                "name": "Jack"
+            }]
+        }
+    ]
+}

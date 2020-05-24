@@ -54,7 +54,6 @@ body {
 }
 
 .nav-tabs>li>a {
-    /* margin-right: 2px; */
     line-height: 1.42857143;
     border: none;
     border-radius: 4px 4px 0 0;
@@ -130,7 +129,7 @@ hr {
     border: 1px solid #2979ff;
 }
 
-.row-panel {
+.row-panel-calender {
     margin-bottom: 9px;
     border-radius: 9px;
     margin-bottom: 20px;
@@ -142,10 +141,28 @@ hr {
     border-left: 9px;
 }
 
-.row-panel:hover {
-    border-top-color: gray;
-    border-bottom-color: gray;
-    border-right-color: gray;
+.row-panel-calender:hover {
+    border-top-color: #2979ff;
+    border-bottom-color: #2979ff;
+    border-right-color: #2979ff;
+}
+
+.row-panel-schedule {
+    margin-bottom: 9px;
+    border-radius: 9px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    border-top: 1px;
+    border-bottom: 1px;
+    border-right: 1px;
+    border-left: 9px;
+}
+
+.row-panel-schedule:hover {
+    border-top-color: #65b168;
+    border-bottom-color: #65b168;
+    border-right-color: #65b168;
 }
 
 .panel-primary {
