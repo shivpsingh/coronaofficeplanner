@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
-    const API_URL = "https://6mvabh1u9g.execute-api.us-west-2.amazonaws.com/dev/slots";
+    const API_HOST_NAME = "https://6mvabh1u9g.execute-api.us-west-2.amazonaws.com/dev";
+    const API_GET_SLOTS = `${API_HOST_NAME}/slots`
+    const API_POST_RESERVE = `${API_HOST_NAME}/reserve`
 
     /** Date Utils */
 
@@ -140,12 +142,25 @@ $(document).ready(function() {
     }
 
     function callApiUrlForReserve(obj) {
-        alert(obj)
+
+        let api_url = API_POST_RESERVE
+
+        $.ajax({
+            type: "POST",
+            url: api_url,
+            data: {
+                'reserveForDate': obj
+            },
+            success: function(result) {
+                alert('success')
+                callApiUrlForNextSevenDaysData()
+            }
+          });
     }
 
     function callApiUrl(start, end, label) {
 
-        api_url = API_URL
+        let api_url = API_GET_SLOTS
 
         if(start != null) {
             startDate = getDateFormat(start)
@@ -161,6 +176,13 @@ $(document).ready(function() {
                 updateDOMHtml(result)
             }
         });
+    }
+
+    function callApiUrlForNextSevenDaysData() {
+        var endCallDate = new Date();
+        endCallDate.setDate(endCallDate.getDate() + 7);
+    
+        callApiUrl(new Date(), endCallDate, null)
     }
 
     $(".nav-tabs a").click(function() {
@@ -180,9 +202,6 @@ $(document).ready(function() {
         });
     });
 
-    var endCallDate = new Date();
-    endCallDate.setDate(endCallDate.getDate() + 7);
-
-    callApiUrl(new Date(), endCallDate, null)
+    callApiUrlForNextSevenDaysData();
 
 });
