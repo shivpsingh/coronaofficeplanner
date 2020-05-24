@@ -1,0 +1,70 @@
+/*
+     Adding Responsive CSS for Large / Medium / Small Devices
+ */
+
+@media (min-width: 1600px) {
+    /* No Changes Required */
+
+}
+
+/* For Large devices */
+@media (min-width: 1200px) {
+
+}
+
+/* For Medium devices */
+@media (min-width: 992px) and (max-width: 1199px) {
+}
+
+/* For Small devices */
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+/* For Extra Small devices */
+@media (max-width: 767px) {
+
+}
+
+/* For Extra Small devices */
+@media (max-width: 480px) {
+    .input-group {
+        position: relative;
+        display: table;
+        border-collapse: separate;
+        width: 90%;
+    }
+    .daterange-width {
+        width: 40%;
+        margin-bottom: 5%;
+        margin-left: 10%;
+    }
+    .account-img {
+        height: 27px;
+        width: 26px;
+        border-radius: 50%;
+        margin-top: 12px;
+        margin-left: 3%;
+    }
+}
+
+/* For Extra Small devices */
+@media (max-width: 320px) {
+    .input-group {
+        position: relative;
+        display: table;
+        border-collapse: separate;
+        width: 90%;
+    }
+    .daterange-width {
+        width: 40%;
+        margin-bottom: 5%;
+        margin-left: 10%;
+    }
+    .account-img {
+        height: 27px;
+        width: 26px;
+        border-radius: 50%;
+        margin-top: 12px;
+        margin-left: 3%;
+    }
+}

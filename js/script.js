@@ -1,30 +1,34 @@
 $(document).ready(function() {
 
-    const API_URL = "https://6mvabh1u9g.execute-api.us-west-2.amazonaws.com/dev/slots";
+    const API_HOST_NAME = "http://localhost:5000";
+    const API_GET_SLOTS = `${API_HOST_NAME}/slots`
+    const API_POST_RESERVE = `${API_HOST_NAME}/reserve`
+
+    var id_count = 0
 
     /** Date Utils */
 
     function dateForLabel(dateObj) {
 
         let obj = dateObj
-        let dd = String(obj).split('/')[0]
-        let mm = String(obj).split('/')[1]
-        let yy = String(obj).split('/')[2]
+        let dd = Number(String(obj).split('/')[0])
+        let mm = Number(String(obj).split('/')[1] - 1)
+        let yy = Number(String(obj).split('/')[2])
         dateObj = new Date(yy, mm, dd)
 
         const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
         let month = monthNames[dateObj.getMonth()];
         let dayName = dayNames[dateObj.getDay()];
-        let output = `${dayName}, ${month} ${dateObj.getDay()}`;
+        let output = `${dayName}, ${month} ${dateObj.getDate()}`;
         return output
     }
 
     function getDateFormat(obj) {
         let dateObj = new Date(obj)
         let day = String(dateObj.getDate()).padStart(2, '0');
-        let month = String(dateObj.getMonth()).padStart(2, '0');
+        let month = String(dateObj.getMonth() + 1).padStart(2, '0');
         let year = dateObj.getFullYear();
         let output =  day + '/' + month + '/' + year;
         return output
@@ -32,8 +36,6 @@ $(document).ready(function() {
 
     /** Dom Element Updates */
     function fillPanelData(dataObj) {
-        
-        dataObj.date = "20/02/2020"
 
         if(!dataObj.reserved) {
 
@@ -60,27 +62,38 @@ $(document).ready(function() {
         }
 
         dataObj.dateLabel = dateForLabel(dataObj.date)
+        people_image_arr = ""
+        dataObj.person_details.forEach(function(item) {
+            let img_data = `<img src="${item.image}" class="slider-img" data-toggle="tooltip" title="${item.name}">`
+            people_image_arr += img_data
+        })
 
-        const PANELDATA = `
-            <div class="${dataObj.activeInActivePanelClass}">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <b>${dataObj.dateLabel}</b>
-                        </div>
-                        <div class="col-md-4">
-                        </div>
-                        <div class="col-md-2">${dataObj.slotsAvailable}
-                        </div>
-                        <div class="col-md-2">${dataObj.reservedSlots}
-                        </div>
-                        <div class="col-md-2">
-                            <button type="submit" value="${dataObj.date}" class="${dataObj.reservedLabelClass}" ${dataObj.disabled}> ${dataObj.reservedLabel} </button>
-                        </div>
-                    </div>
-                </div>
+        PANELDATA = `
+<div class="${dataObj.activeInActivePanelClass}">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2">
+                <b>${dataObj.dateLabel}</b>
             </div>
-    `
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-2">${dataObj.slotsAvailable}
+            </div>
+            <div class="col-md-2" data-toggle="collapse" data-target="#collapse-${id_count}">${dataObj.reservedSlots}
+            </div>
+            <div class="col-md-2">
+                <button type="submit" value="${dataObj.date}" class="${dataObj.reservedLabelClass}" ${dataObj.disabled}> ${dataObj.reservedLabel} </button>
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <div id="collapse-${id_count}" class="collapse">
+                ${people_image_arr}
+            </div>
+        </div>
+    </div>
+</div>
+`
+    id_count += 1
     return PANELDATA
     }
 
@@ -116,8 +129,18 @@ $(document).ready(function() {
             let key_val = fillLocationLabel({
                 'locationLabel': key
             })
-            document.getElementsByClassName("calender-panel-container-removable").innerHTML += key_val;
-            document.getElementsByClassName("schedule-panel-container-removable").innerHTML += key_val;
+            let reserved = false
+            value.forEach(function(item) {
+                if(item.reserved) {
+                    reserved = true
+                }
+            })
+            if(value != []) {
+                document.getElementsByClassName("calender-panel-container-removable").innerHTML += key_val;
+            }
+            if(reserved) {
+                document.getElementsByClassName("schedule-panel-container-removable").innerHTML += key_val;
+            }
             value.forEach(print_val);
             drop_list.push(key)
         }
@@ -140,18 +163,32 @@ $(document).ready(function() {
     }
 
     function callApiUrlForReserve(obj) {
-        alert(obj)
+
+        let api_url = API_POST_RESERVE
+
+        $.ajax({
+            type: "POST",
+            url: api_url,
+            data: {
+                'reserveForDate': obj
+            },
+            success: function(result) {
+                for (const [key, value] of Object.entries(result)) {
+                    // console.log(`${key} -> ${value}`);
+                }
+                callApiUrlForNextSevenDaysData()
+            }
+          });
     }
 
     function callApiUrl(start, end, label) {
 
-        api_url = API_URL
+        let api_url = API_GET_SLOTS
 
         if(start != null) {
             startDate = getDateFormat(start)
             endDate = getDateFormat(end)
-            api_url += ("?" + "startDate=" + startDate+ "endDate=" + endDate);
-            console.log(api_url);
+            api_url += `?startDate=${startDate}&endDate=${endDate}`
         }
 
         $.ajax({
@@ -161,6 +198,23 @@ $(document).ready(function() {
                 updateDOMHtml(result)
             }
         });
+    }
+
+    function callApiUrlForNextSevenDaysData() {
+        var endCallDate = new Date();
+        endCallDate.setDate(endCallDate.getDate() + 7);
+    
+        let start = new Date()
+        let end = endCallDate
+
+        callApiUrl(start, end, null)
+
+        let start_date_to_set = dateForLabel(getDateFormat(start)).split(', ')[1]
+        let end_date_to_set = dateForLabel(getDateFormat(end)).split(', ')[1]
+        let dateRangeDom = `${start_date_to_set} - ${end_date_to_set}`
+
+        $('.date-picker-style').empty()
+        $('.date-picker-style').append(`<b class="gray">${dateRangeDom}</b>`);
     }
 
     $(".nav-tabs a").click(function() {
@@ -177,12 +231,16 @@ $(document).ready(function() {
             opens: 'left'
         }, function(start, end, label) {
             callApiUrl(start, end, label)
+            let start_date_to_set = dateForLabel(getDateFormat(start)).split(', ')[1]
+            let end_date_to_set = dateForLabel(getDateFormat(end)).split(', ')[1]
+            let dateRangeDom = `${start_date_to_set} - ${end_date_to_set}`
+
+            $('.date-picker-style').empty()
+            $('.date-picker-style').append(`<b class="gray">${dateRangeDom}</b>`);
         });
     });
 
-    var endCallDate = new Date();
-    endCallDate.setDate(endCallDate.getDate() + 7);
-
-    callApiUrl(new Date(), endCallDate, null)
+    $('[data-toggle="tooltip"]').tooltip();
+    callApiUrlForNextSevenDaysData();
 
 });
