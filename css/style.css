@@ -1,5 +1,4 @@
 * {
-    padding: 0px;
     margin: 0px;
 }
 
@@ -100,7 +99,13 @@ hr {
 }
 
 .location-label {
-    color: white;background-color: #989898;
+    color: white;
+    background-color: #989898;
+}
+
+.location-label:hover {
+    color: white;
+    background-color: #989898;
 }
 
 .btn2 {
@@ -118,10 +123,29 @@ hr {
 }
 
 .panel-group .panel:hover {
-    margin-bottom: 9px;
+    margin-bottom: 5px;
+    padding-left: 8px;
     border-left-width: 9px;
     border-radius: 9px;
     border: 1px solid #2979ff;
+}
+
+.row-panel {
+    margin-bottom: 9px;
+    border-radius: 9px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    border-top: 1px;
+    border-bottom: 1px;
+    border-right: 1px;
+    border-left: 9px;
+}
+
+.row-panel:hover {
+    border-top-color: gray;
+    border-bottom-color: gray;
+    border-right-color: gray;
 }
 
 .panel-primary {
