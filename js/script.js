@@ -7,12 +7,12 @@ $(document).ready(function() {
         if(!dataObj.reserved) {
 
             if(dataObj.available_slots == 0) {
-                dataObj.activeInActivePanelClass = `panel panel-secondary`
+                dataObj.activeInActivePanelClass = `row-panel panel-secondary`
                 dataObj.slotsAvailable = `Fully Reserved`
                 dataObj.disabled = "disabled"
             } else {
                 dataObj.disabled = ""
-                dataObj.activeInActivePanelClass = `panel panel-primary`
+                dataObj.activeInActivePanelClass = `row-panel panel-primary`
                 dataObj.slotsAvailable = dataObj.available_slots + ` Spot Available`
             }
 
@@ -20,20 +20,17 @@ $(document).ready(function() {
             dataObj.dateLabel = dataObj.date
             dataObj.reservedLabel = `Reserve`
             dataObj.reservedLabelClass = `btn btn2`
-            dataObj.panelClass = `calender-panel-container-removable`
         } else {
-            dataObj.activeInActivePanelClass = `panel panel-reserved`
+            dataObj.activeInActivePanelClass = `row-panel panel-reserved`
             dataObj.reservedSlots = ''
             dataObj.slotsAvailable = ''
             dataObj.dateLabel = dataObj.date
             dataObj.reservedLabel = `Reserved`
             dataObj.reservedLabelClass = `btn btn3`
-            dataObj.panelClass = `schedule-panel-container-removable`
             dataObj.disabled = "disabled"
         }
 
         const PANELDATA = `
-        <div class="panel-group">
             <div class="${dataObj.activeInActivePanelClass}">
                 <div class="panel-body">
                     <div class="row">
@@ -50,30 +47,22 @@ $(document).ready(function() {
                     </div>
                 </div>
             </div>
-        </div>
     `
     return PANELDATA
     }
 
     function fillLocationLabel(locationObj) {
-        const LOCATIONLABEL = `
-        <div class="btn location-label">${locationObj.locationLabel}</div><br><br>`
+        const LOCATIONLABEL = `<button id="${locationObj.locationLabel}" class="btn location-label" disabled>${locationObj.locationLabel}</button><br><br>`
         return LOCATIONLABEL
     }
 
     function callApiUrl(start, end, label) {
 
-        $('.schedule-panel-container-removable').remove();
-        $('.calender-panel-container-removable').remove();
-
         api_url = API_URL
 
-        if(start) {
+        if(start != null) {
             startDate = new Date(start['_d'])
-            console.log(startDate.getMonth());
             endDate = new Date(start['_d'])
-            console.log(endDate.getMonth());
-            console.log(label);
             api_url += ("?" + "startDate=" + startDate.getMonth()+ "endDate=" + endDate.getMonth());
             console.log(api_url);
         }
@@ -83,11 +72,18 @@ $(document).ready(function() {
             async: true,
             success: function(result) {
 
+                $('#schedule-panel-container').empty();
+                $('#calender-panel-container').empty();
+                document.getElementsByClassName("schedule-panel-container-removable").innerHTML = ""
+                document.getElementsByClassName("calender-panel-container-removable").innerHTML = ""
+
+                let drop_list = []
+
                 function setDivElem(data, reserved) {
                     if (reserved) {
-                        document.getElementById("schedule-panel-container").innerHTML += data;
+                        document.getElementsByClassName("schedule-panel-container-removable").innerHTML += data;
                     } else {
-                        document.getElementById("calender-panel-container").innerHTML += data;
+                        document.getElementsByClassName("calender-panel-container-removable").innerHTML += data;
                     }
                 }
 
@@ -100,13 +96,20 @@ $(document).ready(function() {
                     let key_val = fillLocationLabel({
                         'locationLabel': key
                     })
-                    
-                    // document.getElementsByClassName("calender-panel-container-removable").innerHTML += key_val;
-                    // document.getElementsByClassName("schedule-panel-container-removable").innerHTML += key_val;
-                    document.getElementById("calender-panel-container").innerHTML += key_val;
-                    document.getElementById("schedule-panel-container").innerHTML += key_val;
+                    document.getElementsByClassName("calender-panel-container-removable").innerHTML += key_val;
+                    document.getElementsByClassName("schedule-panel-container-removable").innerHTML += key_val;
                     value.forEach(print_val);
+                    drop_list.push(key)
                 }
+
+                $('.dropdown-menu').empty();
+                drop_list.forEach(function(item) {
+                    $('.dropdown-menu').append(`<a class="dropdown-item" href="#` + item + `">'` + item + `'</a>`);
+                });
+                $('#schedule-panel-container').append(document.getElementsByClassName("schedule-panel-container-removable").innerHTML)
+                $('#calender-panel-container').append(document.getElementsByClassName("calender-panel-container-removable").innerHTML)
+
+                console.log('Got here');
             }
         });
     }
@@ -128,6 +131,6 @@ $(document).ready(function() {
         });
     });
 
-    callApiUrl({}, {}, {})
+    callApiUrl(null, null, null)
 
 });
